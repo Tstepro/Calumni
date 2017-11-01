@@ -18,7 +18,7 @@ class CalumnisController < ApplicationController
 #   end
 
   def people_params
-    params.require(:people).permit(:username, :email, :description, :company, :start_date, :resume, :university, :major, :graduation, :help, :position,:avatar)
+    params.require(:people).permit(:username, :email, :description, :company, :start_date, :university, :major, :graduation, :help, :position, :avatar, :resume)
   end
 
   public
@@ -51,16 +51,38 @@ class CalumnisController < ApplicationController
     @people= People.select{|p| p.email==cookies[:email]}
   end
 
-  def upload
+  def update_profile
+    @people= People.select{|p| p.email==cookies[:email]}
+    @people.first.update_attributes(people_params)
+    redirect_to profile_path
+  end
+
+  def upload_avatar
     @people= People.select{|p| p.email==cookies[:email]}
   end
   def receiveimg
+        if not people_params
+          redirect_to profile_path
+        end
         @people= People.select{|p| p.email==cookies[:email]}
+
         @people.first.update_attributes(people_params)
-        @people.first.save
+        # @people.first.save
         redirect_to profile_path
   end
 
+  def upload_resume
+    @people= People.select{|p| p.email==cookies[:email]}
+  end
+  def receivepdf
+        if not people_params
+          redirect_to profile_path
+        end
+        @people= People.select{|p| p.email==cookies[:email]}
+        @people.first.update_attributes(people_params)
+        # @people.first.save
+        redirect_to profile_path
+  end
   def profile
 
     # check username and password first
@@ -116,12 +138,6 @@ class CalumnisController < ApplicationController
     # end
   end
   def create_mentee
-  end
-
-  def update_profile
-    @people= People.select{|p| p.email==cookies[:email]}
-    @people.first.update_attributes(people_params)
-    redirect_to profile_path
   end
   
   def search

@@ -25,9 +25,6 @@
    = form.label :description, 'Description'
    = form.text_field :description
 
-   = form.label :people, :resume
-   = form.text_field :resume
-
    = form.label :people, :university
    = form.text_field :university
 
@@ -39,5 +36,8 @@
 
    = form.label :people, :avatar
    = form.file_field :avatar
+
+   = form.label :people, :resume
+   = form.file_field :resume
    
    = form.submit 'Update'

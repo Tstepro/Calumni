@@ -15,15 +15,13 @@ Rails.application.routes.draw do
 
   get  'create_mentee'   => 'calumnis#create_mentee',  :as => 'create_mentee'
   get  'profile'   => 'calumnis#profile',  :as => 'profile'
-  patch 'profile' => 'calumnis#update_profile', :as =>"update_profile"
+  patch 'update_profile' => 'calumnis#update_profile', :as =>"update_profile"
   get  'edit_profile'   => 'calumnis#edit_profile',  :as => 'edit_profile'
-  get  'upload' => 'calumnis#upload', :as =>'upload'
+  
 
   root 'calumnis#home'
   get "/auth/google_oauth2/callback" => "auth#google_callback",:as => "google_callback"
   get "/auth/logout" => "auth#logout", :as => 'logout'
-
-  patch'upload' => 'calumnis#receiveimg', :as =>'receiveimg'
 
   resources :conversations do
     resources :messages
