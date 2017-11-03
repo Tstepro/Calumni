@@ -7,7 +7,8 @@
 
 = image_tag @people.first.avatar.url(:medium)
 
-= link_to 'Upload avatar', upload_path
+
+%iframe{:width => 600, :height =>900, :src => @people.first.resume.url, :frameborder =>"0"}
 / = form_for profile_path, html: { multipart: true} do |form|
 /   = form.file_field :avatar
 %table
